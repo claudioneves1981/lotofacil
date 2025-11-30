@@ -54,17 +54,17 @@ public class Main {
 
         }
 
-        mapResult(listNumeros,numerosAleatorios);
+        mapResult(numerosAleatorios);
 
     }
 
 
-    public static void mapResult(List<Integer> listNumeros, Set<Integer> numerosAleatorios){
+    public static void mapResult(Set<Integer> numerosAleatorios){
 
         String nomeArquivo = "lotofacil_combinacoes.txt";
         StringBuilder texto = new StringBuilder();
 
-        for (List<Integer> conjuntoJogo : quantidadeSequencias(numerosAleatorios)) {
+        for (List<Integer> conjuntoJogo : quantidadeSequencias()) {
 
             Map<Character, Integer> mapResult = new HashMap<>();
 
@@ -102,7 +102,7 @@ public class Main {
         return numerosCopia.subList(0, tamanho);
     }
 
-    public static List<List<Integer>> quantidadeSequencias(Set<Integer> numerosAleatorios){
+    public static List<List<Integer>> quantidadeSequencias(){
 
         List<List<Integer>> conjuntoJogos = new ArrayList<>();
 
