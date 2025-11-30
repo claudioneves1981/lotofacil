@@ -70,16 +70,7 @@ public class Main {
 
             for (int j = 0; j < 15; j++) {
 
-                if (j<=6) {
-
-                    mapResult.put(reverseMap.get(listNumeros.get(j)), listNumeros.get(j));
-
-                }else{
-
-                    mapResult.put(reverseMap.get(conjuntoJogo.get(j - 7)), conjuntoJogo.get(j - 7));
-
-
-                }
+                    mapResult.put(reverseMap.get(conjuntoJogo.get(j)), conjuntoJogo.get(j));
 
             }
 
@@ -115,10 +106,11 @@ public class Main {
 
         List<List<Integer>> conjuntoJogos = new ArrayList<>();
 
-        List<Integer> numerosFixos = numerosAleatorios.stream().toList();
+        List<Integer> numerosFixos = numeros.stream().toList();
 
         System.out.println("Digite a quantidade de sequencias:");
-        int tamanhoSequencia = 8;
+
+        int tamanhoSequencia = 15;
         int quantidadeSequencias = scanner.nextInt();
 
         for (int i = 0; i < quantidadeSequencias; i++) {
