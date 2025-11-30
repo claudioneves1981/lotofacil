@@ -54,12 +54,12 @@ public class Main {
 
         }
 
-        mapResult(numerosAleatorios);
+        mapResult();
 
     }
 
 
-    public static void mapResult(Set<Integer> numerosAleatorios){
+    public static void mapResult(){
 
         String nomeArquivo = "lotofacil_combinacoes.txt";
         StringBuilder texto = new StringBuilder();
