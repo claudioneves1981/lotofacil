@@ -87,7 +87,7 @@ public class Main {
 
         try (FileWriter bw = new FileWriter(nomeArquivo)) {
 
-            bw.write(String.valueOf(texto)); // Escreve o texto
+            bw.write(String.valueOf(texto));
 
             System.out.println("Dados gravados com sucesso no arquivo: " + nomeArquivo);
         } catch (IOException e) {
