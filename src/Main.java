@@ -1,0 +1,131 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+
+public class Main {
+
+    static Map<Character, Integer> combinacoes = new HashMap<>();
+    static Scanner scanner = new Scanner(System.in);
+    static LinkedHashSet<Integer> numeros = new LinkedHashSet<>();
+    static Map<Integer, Character> reverseMap = new HashMap<>();
+
+    public static void main(String[] args) {
+
+        int index = 'A';
+        int num1;
+        int opcao1;
+
+        System.out.println("Informe a quantidade de numeros fixos");
+        opcao1 = scanner.nextInt();
+
+        System.out.println("Digite "+opcao1+" numeros:");
+
+        for (int i = index; i < (index + opcao1); i++) {
+
+            num1 = scanner.nextInt();
+            numeros.add(num1);
+
+        }
+
+        Set<Integer> numerosAleatorios = new HashSet<>();
+
+        Random random = new Random();
+
+        while (numerosAleatorios.size() < 11) {
+            int num = random.nextInt(1, 25);
+
+            if (!numeros.contains(num)) { // não pode ser igual aos fixos
+                numerosAleatorios.add(num);    // Set garante que não repete
+            }
+        }
+
+        numeros.addAll(numerosAleatorios);
+
+
+        List<Integer> listNumeros = numeros.stream().toList();
+
+        int cont = 0;
+        for(int i = index; i < numeros.size()+index; i++){
+
+
+            combinacoes.put((char)i,listNumeros.get(cont));
+            reverseMap.put(listNumeros.get(cont),(char)i);
+            cont++;
+
+        }
+
+        mapResult(listNumeros,numerosAleatorios);
+
+    }
+
+
+    public static void mapResult(List<Integer> listNumeros, Set<Integer> numerosAleatorios){
+
+        String nomeArquivo = "lotofacil_combinacoes.txt";
+        StringBuilder texto = new StringBuilder();
+
+        for (List<Integer> conjuntoJogo : quantidadeSequencias(numerosAleatorios)) {
+
+            Map<Character, Integer> mapResult = new HashMap<>();
+
+            for (int j = 0; j < 15; j++) {
+
+                if (j<=6) {
+
+                    mapResult.put(reverseMap.get(listNumeros.get(j)), listNumeros.get(j));
+
+                }else{
+
+                    mapResult.put(reverseMap.get(conjuntoJogo.get(j - 7)), conjuntoJogo.get(j - 7));
+
+
+                }
+
+            }
+
+            texto.append(mapResult).append("\n");
+
+
+        }
+
+        gerarArquivo(texto,nomeArquivo);
+
+    }
+
+    public static void gerarArquivo(StringBuilder texto, String nomeArquivo){
+
+        try (FileWriter bw = new FileWriter(nomeArquivo)) {
+
+            bw.write(String.valueOf(texto)); // Escreve o texto
+
+            System.out.println("Dados gravados com sucesso no arquivo: " + nomeArquivo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static List<Integer> gerarSequenciaAleatoria(List<Integer> numeros, int tamanho) {
+        List<Integer> numerosCopia = new ArrayList<>(numeros);
+        Collections.shuffle(numerosCopia, new Random());
+        return numerosCopia.subList(0, tamanho);
+    }
+
+    public static List<List<Integer>> quantidadeSequencias(Set<Integer> numerosAleatorios){
+
+        List<List<Integer>> conjuntoJogos = new ArrayList<>();
+
+        List<Integer> numerosFixos = numerosAleatorios.stream().toList();
+
+        System.out.println("Digite a quantidade de sequencias:");
+        int tamanhoSequencia = 8;
+        int quantidadeSequencias = scanner.nextInt();
+
+        for (int i = 0; i < quantidadeSequencias; i++) {
+            List<Integer> sequencia = gerarSequenciaAleatoria(numerosFixos, tamanhoSequencia);
+            conjuntoJogos.add(sequencia);
+        }
+
+        return conjuntoJogos;
+    }
+}
