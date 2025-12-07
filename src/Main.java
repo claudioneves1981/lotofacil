@@ -8,6 +8,7 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
     static LinkedHashSet<Integer> numeros = new LinkedHashSet<>();
     static Map<Integer, Character> reverseMap = new HashMap<>();
+    static StringBuilder texto = new StringBuilder();
 
     public static void main(String[] args) {
 
@@ -54,6 +55,8 @@ public class Main {
 
         }
 
+        texto.append("Sequencia Base: 18 numeros\n").append(combinacoes).append("\n\n");
+
         mapResult();
 
     }
@@ -62,7 +65,9 @@ public class Main {
     public static void mapResult(){
 
         String nomeArquivo = "lotofacil_combinacoes.txt";
-        StringBuilder texto = new StringBuilder();
+        int cont = 0;
+
+        texto.append("Jogos\n");
 
         for (List<Integer> conjuntoJogo : quantidadeSequencias()) {
 
@@ -74,7 +79,7 @@ public class Main {
 
             }
 
-            texto.append(mapResult).append("\n");
+            texto.append(++cont).append("-").append(mapResult).append("\n");
 
 
         }
